@@ -1,0 +1,28 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+}
+
+a {
+  text-decoration: none;
+}
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+}
+
+button {
+}
+button:hover {
+}
+button:focus,
+button:focus-visible {
+}
