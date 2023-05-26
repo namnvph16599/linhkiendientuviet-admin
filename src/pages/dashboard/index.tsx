@@ -1,7 +1,16 @@
 import { Breadcrumb, Button } from 'antd';
 import { memo } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/app';
+import { increment } from '../../slices/count';
 
 const DashBoard = memo(() => {
+    const count = useAppSelector((state) => state.count.value);
+    const dispatch = useAppDispatch();
+
+    const handleClick = () => {
+        dispatch(increment());
+    };
+
     return (
         <div>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -18,6 +27,11 @@ const DashBoard = memo(() => {
                 <Button type="text">Text Button</Button>
                 <Button type="link">Link Button</Button>
             </div>
+
+            <Button type="primary" onClick={handleClick}>
+                +
+            </Button>
+            {count}
         </div>
     );
 });
