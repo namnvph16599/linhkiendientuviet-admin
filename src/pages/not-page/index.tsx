@@ -2,7 +2,7 @@ import { Result } from 'antd';
 import { Link } from 'react-router-dom';
 const PageNotFound = () => {
     return (
-        <div className="bg-[#02b875] h-screen flex justify-center content-center  items-center">
+        <div className="bg-primarys-default h-screen flex justify-center content-center  items-center">
             <Result
                 status="404"
                 subTitle={<span className="text-white">Xin lỗi, trang này không tồn tại!</span>}

@@ -1,108 +1,63 @@
-import { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { DashboardOutlined, PieChartOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, DashboardOutlined } from '@ant-design/icons';
 import { APP_ROUTER, APP_ROUTER_LABEL } from '../constants';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content, Sider } = Layout;
 
-const siderBarItems = [
+type MenuItem = Required<MenuProps>['items'][number];
+
+const items: MenuItem[] = [
     {
-        path: APP_ROUTER.DASHBOARD,
+        key: APP_ROUTER.DASHBOARD,
         icon: <DashboardOutlined />,
         label: APP_ROUTER_LABEL.DASHBOARD,
     },
     {
-        key: 'thong-ke',
+        key: APP_ROUTER.PRODUCT.LIST + 'products',
+        label: APP_ROUTER_LABEL.PRODUCT.DEFAULT,
         icon: <PieChartOutlined />,
         children: [
-            { key: 'Thống kê đơn hàng', path: 'thong-ke-don-hang', label: 'Đơn hàng' },
+            { key: APP_ROUTER.PRODUCT.LIST, label: APP_ROUTER_LABEL.PRODUCT.LIST },
             {
-                key: 'Thống kê trạng thái đơn hàng',
-                path: 'thong-ke-don-hang-theo-trang-thai',
-                label: 'Trạng thái đơn hàng',
+                key: APP_ROUTER.PRODUCT.CREATE,
+                label: APP_ROUTER_LABEL.PRODUCT.CREATE,
             },
-            { key: 'Thống kê doanh thu', path: 'thong-ke-doanh-thu', label: 'Doanh thu' },
         ],
     },
 ];
 
-const AdminLayout = () => {
-    const [collapsed, setCollapsed] = useState(false);
-    const [siderBar, setSiderBar] = useState<any>(siderBarItems);
-
+const AdminLayout: React.FC = () => {
     const navigate = useNavigate();
+    const [collapsed, setCollapsed] = useState(false);
 
-    const handleClick = (data: any) => {
-        const {
-            item: {
-                props: { path },
-            },
-        } = data;
-        navigate(`/admin/${path}`);
-    };
+    const handleNavigate = useCallback(
+        (value: any) => {
+            const { key } = value;
+            navigate(key);
+        },
+        [navigate],
+    );
 
     return (
-        <Layout>
-            <Sider
-                trigger={null}
-                collapsible
-                collapsed={collapsed}
-                className="sider-admin-bg "
-                id="sider-admin"
-                style={{
-                    overflow: 'auto',
-                    height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                }}
-            >
-                <Link to={'/'}>
-                    <div className="flex items-center justify-center gap-4">
-                        {/* <img src="/images/admin-logo.png" className="my-4 sm:h-16" alt="Dodoris Logo" /> */}
-                        <p className="text-[#ffff] font-bold">Dodoris</p>
-                    </div>
+        <Layout style={{ minHeight: '100vh' }}>
+            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+                <Link to="/">
+                    <img
+                        src={!collapsed ? '/public/images/logo.jpg' : '/public/images/logo-icon.jpg'}
+                        alt="Linh kiện điện tử - Việt"
+                        className={'p-4'}
+                    />
                 </Link>
-                <Menu
-                    style={{ backgroundColor: '#17274e' }}
-                    theme="dark"
-                    className="menu-admin-bg "
-                    defaultSelectedKeys={['1']}
-                    mode="inline"
-                    items={siderBar}
-                    onClick={handleClick}
-                />
+                <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={handleNavigate} />
             </Sider>
-            <Layout className="site-layout h-screen " style={{ overflow: 'initial', marginLeft: collapsed ? 80 : 200 }}>
-                <Header
-                    style={{
-                        padding: 0,
-                        backgroundColor: '#ffffff',
-                        borderBottom: '1px solid #ccc',
-                    }}
-                >
-                    <div className="flex justify-between items-center px-10">
-                        <div>
-                            {collapsed ? (
-                                <span onClick={() => setCollapsed(!collapsed)} className="trigger">
-                                    <MenuUnfoldOutlined className="cursor-pointer" style={{ fontSize: '20px' }} />
-                                </span>
-                            ) : (
-                                <span onClick={() => setCollapsed(!collapsed)} className="trigger">
-                                    <MenuFoldOutlined className="cursor-pointer" style={{ fontSize: '20px' }} />
-                                </span>
-                            )}
-                        </div>
-                        {/* <User layoutAdmin={true} /> */}
-                    </div>
-                </Header>
-                <Content className="bg-white p-6">
-                    <div className="site-layout-background">
-                        <Outlet />
-                    </div>
+            <Layout>
+                <Header style={{ padding: 0, background: '#FFFFFF' }}>header</Header>
+                <Content style={{ margin: '0 16px' }}>
+                    <Outlet />
                 </Content>
             </Layout>
         </Layout>

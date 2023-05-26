@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-    --primary-color: #02b875;
-    --primary-color-hover: #09915f;
-    --sider-admin-color: #17274e;
-    --btn-checkbox-disable: #bfbfbf;
-    --white-color: #ffffff;
-    --disabled-color: #f5f5f5;
-}
-a:hover {
-    color: var(--primary-color);
+    --primary-color: #ffc42c;
+    --primary-color-hover: hsl(43, 91%, 58%);
+    --sider-admin-color: #fff;
+    --white-color: #fff;
 }
 h1,
 h2,
@@ -22,102 +17,57 @@ h6 {
     font-weight: revert;
 }
 
-button:disabled {
-    cursor: no-drop !important ;
-    opacity: 0.6;
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
 }
 
-/* customize btn checkbox checked */
-.ant-checkbox-checked .ant-checkbox-inner {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
+* {
+    box-sizing: border-box;
 }
 
-/*  customize btn type primary*/
-
-.ant-btn.ant-btn-sm,
-.btn-primary {
-    background-color: var(--primary-color) !important;
-    color: var(--white-color) !important;
-    border: none;
-    outline: none;
+.content p {
+    @apply my-6;
 }
 
-/* .btn-primary:disabled {
-    background-color: var(--disabled-color) !important;
-} */
-.btn-primary:hover {
-    background-color: var(--primary-color-hover) !important;
-    color: var(--white-color) !important;
-    border: none;
-    outline: none;
+.content ul {
+    @apply my-6;
 }
 
-.ant-btn.ant-btn-sm:hover {
-    background-color: var(--primary-color-hover) !important;
-}
+/* antd */
 
-/* customize color spin loading  */
-.spin-customize .ant-spin-dot-item {
-    background-color: var(--primary-color) !important;
-}
-.spin-customize .ant-spin-text {
-    padding-top: 24px !important;
-    font-size: 18px !important;
-    font-weight: 500;
-    color: var(--primary-color);
-}
-.ant-image-preview-img-wrapper {
-    display: flex;
-    justify-content: center;
-}
-.ant-image-preview-img {
-    position: absolute;
-    top: 0px;
-    padding: 5% 0px;
-}
-.ant-image-mask {
-    border-radius: 50%;
-}
-.aaa > .ant-row {
-    display: inherit;
-}
-
-/* cusomize color antd selector datepicker */
-.ant-select .ant-select-selector:focus-within,
-.ant-picker-focused,
-.ant-picker,
-.ant-picker-cell-inner::before {
-    border: 1px solid var(--primary-color) !important;
-}
-.ant-picker-today-btn {
-    color: var(--primary-color) !important;
-}
-/* css btn datepicker */
-
-.ant-picker-range .ant-picker-active-bar,
-.ant-picker-dropdown .ant-picker-cell-range-start .ant-picker-cell-inner,
-.ant-picker-dropdown .ant-picker-cell-range-end .ant-picker-cell-inner,
-.ant-picker-dropdown .ant-picker-cell-selected .ant-picker-cell-inner,
-.ant-picker-dropdown .ant-picker-week-panel-row-selected td {
-    background-color: var(--primary-color) !important;
-    color: var(--white-color) !important;
-}
-/* css .ant-slider-track */
-
-.ant-slider-track {
-    background-color: #02b875 !important;
-}
-
-.icon-admin {
-    display: flex;
-    align-items: center !important;
-}
-/* css inputn */
+.ant-input:hover,
 .ant-input:focus {
-    border-color: var(--primary-color) !important;
+    @apply border-grayscale-black;
 }
-.ant-statistic>.ant-statistic-content{
-    margin-left: 10px;
-    font-size: 20px;
+
+.ant-btn-primary {
+    @apply bg-primarys-default;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:not(:disabled):hover {
+    @apply bg-primarys-hover;
+}
+
+.ant-btn-primary:disabled {
+    @apply bg-primarys-disabled text-white;
+}
+
+.ant-btn-default:not(:disabled):hover,
+.ant-btn-dashed:not(:disabled):hover {
+    @apply text-primarys-hover border-primarys-hover;
+}
+.ant-btn-text:not(:disabled):hover {
+    @apply text-white  bg-primarys-hover;
+}
+
+.ant-btn-link:not(:disabled):hover {
+    @apply text-primarys-default;
+}
+
+.ant-btn-link {
+    @apply text-grayscale-black;
 }

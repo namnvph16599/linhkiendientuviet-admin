@@ -1,17 +1,16 @@
-.sider-admin-bg,
-#sider-admin .ant-menu-dark.ant-menu-inline .ant-menu-sub.ant-menu-inline {
-    background-color: var(--sider-admin-color) !important;
+.ant-layout .ant-layout-sider {
+    background: var(--sider-admin-color) !important;
+}
+.ant-layout .ant-layout-sider-trigger {
+    color: var(--primary-color) !important;
+    background: var(--sider-admin-color) !important;
 }
 
-.sider-admin-bg .ant-menu-item-selected,
-.sider-admin-bg .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected,
-#sider-admin .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):active,
-#sider-admin .ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-submenu-title:active,
-.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):active,
-.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+.ant-menu-light .ant-menu-item-selected {
+    color: var(--white-color) !important;
     background: var(--primary-color) !important;
 }
-.ant-menu-item,
-.ant-menu-submenu-title {
-    padding-left: 10px !important;
+
+.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    color: var(--primary-color-hover) !important;
 }

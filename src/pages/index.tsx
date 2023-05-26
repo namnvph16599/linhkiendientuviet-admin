@@ -13,3 +13,4 @@ const LazyLayout = (importStatement: () => Promise<any>) => {
 
 export const DashBoard = () => LazyLayout(() => import('./dashboard'));
 export const PageNotFound = () => LazyLayout(() => import('./not-page'));
+export const Product = () => LazyLayout(() => import('./products'));

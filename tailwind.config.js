@@ -6,11 +6,9 @@ module.exports = {
             transparent: 'transparent',
             white: '#FFFFFF',
             primarys: {
-                default: '#ff9793',
-                disabled: '#ffdedd',
-                light: '#FFEFC4',
-                lighter: '#FFF4D9',
-                hover: '#ff6e6c',
+                default: '#ffc42c',
+                disabled: '#e3af2b',
+                hover: '#f5be31',
             },
             grayscale: {
                 black: '#202C38',
@@ -358,11 +356,12 @@ module.exports = {
             },
             borderWidth: {},
             borderColor: {
+                transparent: 'transparent',
+                white: '#FFFFFF',
                 primarys: {
-                    default: '#ff9793',
-                    light: '#FFEFC4',
-                    lighter: '#FFF4D9',
-                    hover: '#faa9a8',
+                    default: '#ffc42c',
+                    disabled: '#e3af2b',
+                    hover: '#f5be31',
                 },
                 grayscale: {
                     black: '#202C38',
@@ -370,6 +369,10 @@ module.exports = {
                     gray: '#676E72',
                     light: '#919699',
                     disabled: '#A6ABAD',
+                },
+                status: {
+                    error: '#FFEAE8',
+                    success: '#1BB045',
                 },
             },
             fontFamily: {
