@@ -1,56 +1,47 @@
-import React, { useCallback, useState } from 'react';
-import BaseModal from 'src/components/modals/BaseModal';
-import ConfirmModal from 'src/components/modals/ConfirmModal';
-import { ConfirmModalType } from 'src/config';
-import { BaseModalState, ConfirmModalState, ModalContextType } from '../models';
-
-export const initialConfirmModal: ConfirmModalState = {
-    type: ConfirmModalType.WARNING,
-    title: 'Activity confirm.',
-    message: 'Are you sure to continue?',
-    onApply: () => {
-        return;
-    },
-    onCancel: () => {
-        return;
-    },
-};
+import React, { useState } from 'react';
+import BaseModal from '@/src/components/BaseModal';
+import ConfirmModal from '@/src/components/modals/ConfirmModal';
+import { BaseModalState, ConfirmModalState, ModalContextType } from '@/src/models';
 
 export const ModalContext = React.createContext<ModalContextType>({} as ModalContextType);
 
-export const ModalProvider: React.FC = ({ children }) => {
+const initialBaseModalState: BaseModalState = {
+    content: <></>,
+};
+
+const getBaseModalProps = (baseModalState: BaseModalState) => {
+    const { content, handleClose, onClose, ...rest } = baseModalState;
+    return rest;
+};
+
+export const ModalProvider: React.FC<CommonReactNodeProps> = ({ children }) => {
     const [openBaseModal, setOpenBaseModal] = useState<boolean>(false);
-    const [baseModalState, setBaseModalState] = useState<BaseModalState>({
-        content: <></>,
-        modalProps: {},
-    });
+    const [baseModalState, setBaseModalState] = useState<BaseModalState>(initialBaseModalState);
 
-    const showModal = useCallback(
-        (config: BaseModalState) => {
-            setBaseModalState(config);
-            setOpenBaseModal(true);
-        },
-        [setBaseModalState, setOpenBaseModal],
-    );
+    const showModal = (config: BaseModalState) => {
+        config = {
+            ...initialBaseModalState,
+            ...config,
+        };
 
-    const closeModal = useCallback(() => {
-        if (typeof baseModalState?.onClose === 'function') {
+        setBaseModalState(config);
+        setOpenBaseModal(true);
+    };
+
+    const closeModal = () => {
+        setOpenBaseModal(false);
+
+        if (typeof baseModalState.onClose === 'function') {
             baseModalState.onClose();
         }
+    };
 
-        setOpenBaseModal(false);
-    }, [setOpenBaseModal]);
-
-    const showConfirm = useCallback(
-        (config: Partial<ConfirmModalState>) => {
-            const confirmModalProps = Object.assign({ ...initialConfirmModal, ...config });
-
-            showModal({
-                content: <ConfirmModal {...confirmModalProps} />,
-            });
-        },
-        [showModal],
-    );
+    const showConfirm = (config: Partial<ConfirmModalState>, baseModalConfig?: Partial<BaseModalState>) => {
+        showModal({
+            content: <ConfirmModal {...config} />,
+            ...baseModalConfig,
+        });
+    };
 
     return (
         <ModalContext.Provider
@@ -62,7 +53,7 @@ export const ModalProvider: React.FC = ({ children }) => {
         >
             {children}
 
-            <BaseModal open={openBaseModal} handleClose={closeModal} {...baseModalState.modalProps}>
+            <BaseModal open={openBaseModal} handleClose={closeModal} {...getBaseModalProps(baseModalState)}>
                 {baseModalState.content}
             </BaseModal>
         </ModalContext.Provider>
