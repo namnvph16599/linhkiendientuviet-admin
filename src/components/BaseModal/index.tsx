@@ -30,7 +30,6 @@ const BaseModal: React.FC<BaseModalProps> = ({
             if (reason === 'backdropClick') {
                 return;
             }
-
             handleClose();
         },
         [handleClose],
